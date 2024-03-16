@@ -47,11 +47,9 @@ The primary goal of this project is to develop a modular memory system for AI ag
    - Provide easy to use, end user interface demonstrating how to integrate the memory system into AI agents.
 
 ## Repository Structure
-- `src/`: Contains the source code for the modular memory system
-  - `memory_blocks/`: example memory blocks
-- `examples/`: Provides example complete agents
-- `docs/`: Contains documentation and tutorials for using the modular memory system
-- `app.html`: Complete user interface, user must provide api key, no information is sent to 3rd parties.
 - `README.md`: Provides an overview of the project and instructions for getting started
+
+To preview the interface use this link:
+https://html-preview.github.io/?url=https://raw.githubusercontent.com/rolyataylor2/LLM-LayeredContext/main/AgentCompiler.html
 
 By following this project outline, we aim to develop a robust and extensible modular memory system that enhances the context awareness and performance of AI agents.
