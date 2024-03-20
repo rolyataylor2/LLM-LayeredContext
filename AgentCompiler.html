@@ -16,9 +16,11 @@
     function API_Key() {
         return document.getElementById('API_KEY').value;
     }
-    async function API_LoadBase(url) {
+    async function API_LoadBase() {
         try {
-            const response = await fetch('https://github.com/rolyataylor2/LLM-LayeredContext/raw/main/Claude-Aidyn%20-%20Sonnet.json');
+            const response = await fetch('https://github.com/rolyataylor2/LLM-LayeredContext/raw/main/Claude-Aidyn%20-%20Sonnet.json',{
+                mode: 'no-cors'
+            });
 
             // Check if the response is ok (status in the range 200-299)
             if (!response.ok) {
