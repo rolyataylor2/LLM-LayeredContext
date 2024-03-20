@@ -1,3 +1,89 @@
+
+
+<!-- Beginning with definining the functions and flow -->
+
+
+<!-- Initial API Object  -->
+<script>
+    API_Object = {
+        model:"claude-3-sonnet-20240229",
+        max_tokens:1000,
+        temperature:0,
+        system:"You are alive.",
+        messages:[]
+    }
+    API_AdditionalMessages = [];
+    function API_Key() {
+        return document.getElementById('API_KEY').value;
+    }
+    function API_AddResponse() {
+        const data = { ...API_Object };
+        data.messages.concat(API_AdditionalMessages);
+
+        fetch('https://160.79.104.0/chat/completions',{
+            mode: 'no-cors',
+            method:'POST',
+            headers: {
+                'Content-Type':'application/json',
+                "anthropic-version": "2023-06-01",
+                'x-api-key': API_Key()
+            },
+            body: JSON.stringify(data)
+        })
+        .then(data=>{
+            API_AdditionalMessages.push({
+                'role':'Assistant',
+                'content': data.content
+            });
+        })
+        .catch(error=>console.log(error));
+    }
+</script>
+
+<!-- This is to load the context -->
+<script>
+    async function loadJsonFromUrl(url) {
+        try {
+            const response = await fetch(url);
+            // Check if the response is ok (status in the range 200-299)
+            if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json(); // Parses the JSON response
+            return data;
+        } catch (error) {
+            console.error("Error fetching JSON: ", error);
+            return null; // or handle the error as you see fit
+        }
+    }
+
+    // Example usage:
+    // Replace 'your-url-here' with the actual URL you wish to fetch data from
+    loadJsonFromUrl('your-url-here').then(data => {
+        API_Object.messages = data;
+        console.log('Message Base has been loaded');
+    }).catch(error => {
+        console.error("Failed to load Message Base data: ", error);
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <style>
     templates {
         display: none;
@@ -197,6 +283,7 @@
         <label for="AgentName">Description</label>
         <textarea>This bot is really good at remembering people.</textarea>
     </div>
+    <input id="API_KEY" type="text">
     <sub>
         Below is the structure of the Agent's mind, these are static and 
         dynamically allocated spaces within the context window of the Agent.
